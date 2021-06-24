@@ -12,9 +12,9 @@ public class Movie {
     private double rating;
 
     public Movie(JSONObject jsonObject) throws JSONException {
-        this.posterUrl = jsonObject.getString("poster_path");
-        this.title = jsonObject.getString("original-title");
-        this.rating = jsonObject.getDouble("vote_average");
+        posterUrl = jsonObject.getString("poster_path");
+        title = jsonObject.getString("original_title");
+        rating = jsonObject.getDouble("vote_average");
     }
 
     public String getTitle() {

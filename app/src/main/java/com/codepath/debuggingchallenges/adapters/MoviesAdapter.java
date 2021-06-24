@@ -5,6 +5,8 @@ import android.content.res.Resources;
 import android.graphics.Color;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,6 +22,7 @@ import java.util.List;
 public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.ViewHolder> {
 
     private List<Movie> movies;
+    Context context;
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         // only needed because we need to set the background color
@@ -38,15 +41,18 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.ViewHolder
             tvRating = itemView.findViewById(R.id.tvRating);
             ivPoster = itemView.findViewById(R.id.ivPoster);
         }
+
+
     }
 
-    public MoviesAdapter(List<Movie> movies) {
+    public MoviesAdapter(Context context, List<Movie> movies) {
+        this.context = context;
         this.movies = movies;
     }
 
     @Override
     public int getItemCount() {
-        return 0;
+        return movies.size();
     }
 
     @NonNull
@@ -66,7 +72,9 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.ViewHolder
     @Override
     public void onBindViewHolder(MoviesAdapter.ViewHolder viewHolder, int position) {
 
+
         Movie movie = movies.get(position);
+
 
         // Populate the data into the template view using the data object
         viewHolder.tvName.setText(movie.getTitle());
@@ -74,15 +82,17 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.ViewHolder
         Resources resources = viewHolder.tvName.getResources();
         double movieRating = movie.getRating();
 
-        if (movieRating > 6) {
+        if (movieRating > 7) {
             viewHolder.view.setBackgroundColor(Color.GREEN);
         }
 
         String ratingText = String.format(resources.getString(R.string.rating), movieRating);
         viewHolder.tvRating.setText(ratingText);
 
-        Glide.with(viewHolder.ivPoster.getContext()).load(movie.getPosterUrl()).into(
-                viewHolder.ivPoster);
+        Glide
+                .with(viewHolder.ivPoster.getContext())
+                .load(movie.getPosterUrl())
+                .into(viewHolder.ivPoster);
 
     }
 }

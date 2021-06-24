@@ -28,9 +28,7 @@ public class MainActivity extends AppCompatActivity {
         launchActivity(MoviesActivity.class);
     }
 
-    public void launchChangeBackgroundActivity(View view) {
-        launchActivity(ChangeBackgroundActivity.class);
-    }
+    public void launchChangeBackgroundActivity(View view) { launchActivity(ChangeBackgroundActivity.class); }
 
     public void launchToolbarActivity(View view) {
         launchActivity(ToolbarActivity.class);
